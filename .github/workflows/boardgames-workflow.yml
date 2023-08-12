@@ -29,3 +29,14 @@ jobs:
     - run: npm install
     - run: npm run test:unit
     - run: echo "Krufeee"
+
+  deploy:
+      needs: build
+      runs-on: ubuntu-latest
+      
+      steps:
+      - name: Render Deploy Action
+        uses: johnbeynon/render-deploy-action@v0.0.8
+        with:
+          service-id: ${{ secrets.WEB_HOOK }}
+          api-key: ${{ secrets.RENDER_API }}
